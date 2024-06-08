@@ -1,4 +1,4 @@
-package CFRound950Div3;
+package Div3.CFRound950Div3;
 
 import java.io.BufferedReader;
 import java.io.IOException;

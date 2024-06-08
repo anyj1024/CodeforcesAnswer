@@ -1,4 +1,4 @@
-package EduRound166Div2;
+package Div2.EduRound166Div2;
 
 import java.util.*;
 import java.io.*;

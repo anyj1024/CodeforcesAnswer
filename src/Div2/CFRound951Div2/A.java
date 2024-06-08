@@ -1,4 +1,4 @@
-package CFRound951Div2;
+package Div2.CFRound951Div2;
 
 import java.io.BufferedReader;
 import java.io.IOException;
