@@ -2,7 +2,6 @@ import java.util.*;
 import java.io.*;
 
 public class Main {
-
     static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
     public static void main(String[] args) throws IOException {
@@ -12,24 +11,16 @@ public class Main {
         }
     }
 
-    private static void solve() throws IOException {
-        String[] nk = br.readLine().split(" ");
-        int n = Integer.parseInt(nk[0]), k = Integer.parseInt(nk[1]);
-        String[] s = br.readLine().split(" ");
-        int[] nums = new int[n];
-        for (int i = 0; i < n; i++) {
-            nums[i] = Integer.parseInt(s[i]);
+    public static void solve() throws IOException {
+        int n = Integer.parseInt(br.readLine());
+        StringBuilder sb = new StringBuilder();
+        int xor = 0;
+        for (int i = 0; i < n - 3; i++) {
+            sb.append(i + " ");
+            xor ^= i;
         }
-
-        long ans = 0, sum = 0;
-        for (int i = -1; i < n; i++) {
-            sum += (i == -1 ? 0 : (nums[i] - k));
-            long cur = sum;
-            for (int j = i + 1; j < Math.min(n, i + 31); j++) {
-                cur += Math.max(0, nums[j] >> (j - i));
-            }
-            ans = Math.max(ans, cur);
-        }
-        System.out.println(ans);
+        int x = 1 << 25, y = 1 << 26;
+        sb.append(xor ^ x ^ y).append(" ").append(x + " ").append(y);
+        System.out.println(sb.toString());
     }
 }
