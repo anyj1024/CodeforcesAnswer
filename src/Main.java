@@ -1,6 +1,7 @@
 import java.util.*;
 import java.io.*;
 
+
 public class Main {
     static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
@@ -12,45 +13,44 @@ public class Main {
     }
 
     public static void solve() throws IOException {
-        int n = Integer.parseInt(br.readLine());
-        String[] s = br.readLine().split(" ");
-        List<Integer> nums = new ArrayList<>();
-        boolean[] visited = new boolean[n];
+        String[] ncd = br.readLine().split(" ");
+        int n = Integer.parseInt(ncd[0]), d = Integer.parseInt(ncd[2]);
+        long c = Long.parseLong(ncd[1]);
+        String[] ns = br.readLine().split(" ");
+        Long[] nums = new Long[n];
         for (int i = 0; i < n; i++) {
-            nums.add(Integer.parseInt(s[i]));
+            nums[i] = Long.parseLong(ns[i]);
         }
-        Collections.sort(nums, Collections.reverseOrder());
-        visited[0] = true;
+        Arrays.sort(nums, Collections.reverseOrder());
 
-        int prev = nums.get(0);
-        List<Integer> ans = new ArrayList<>();
-        ans.add(prev);
-
-        while (true) {
-            int  position = -1, last = prev;
-            for (int i = 0; i < n; i++) {
-                if (visited[i]) continue;
-                if ((prev | nums.get(i)) > last) {
-                    last = prev | nums.get(i);
-                    position = i;
-                }
+        long left = 0, right = d + 2;
+        long ans = 0;
+        while (left < right) {
+            long mid = left + (right - left + 1) / 2;
+            if (check(nums, c, d, mid)) {
+                left = mid;
+                ans = left;
+            } else {
+                right = mid - 1;
             }
-
-            if (position == -1) break;
-            ans.add(nums.get(position));
-            visited[position] = true;
-            prev |= nums.get(position);
         }
 
-        for (int num : ans) {
-            System.out.print(num + " ");
+        if (ans == 0) {
+            System.out.println("Impossible");
+        } else if (ans == d + 2) {
+            System.out.println("Infinity");
+        } else {
+            System.out.println(ans - 1);
         }
-        for (int i = 0; i < n; i++) {
-            if (visited[i]) continue;
-            System.out.print(nums.get(i) + " ");
-        }
-
-        System.out.println();
     }
 
+    private static boolean check(Long[] nums, long c, int d, long k) {
+        long total = 0;
+        for (int ind = 0; ind < d; ind++) {
+            if (ind % k < nums.length) {
+                total += nums[(int)(ind % k)];
+            }
+        }
+        return total >= c;
+    }
 }
