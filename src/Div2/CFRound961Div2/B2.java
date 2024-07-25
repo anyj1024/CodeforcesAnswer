@@ -1,8 +1,12 @@
-import java.util.*;
-import java.io.*;
+package Div2.CFRound961Div2;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.HashMap;
+import java.util.Map;
 
-public class Main {
+public class B2 {
     static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
     public static void main(String[] args) throws IOException {
