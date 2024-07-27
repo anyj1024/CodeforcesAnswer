@@ -1,14 +1,12 @@
 package Div4.CFRound835Div4;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.Writer;
 import java.util.*;
+import java.io.*;
+
 
 public class F {
     static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-    static boolean found = false;
+
     public static void main(String[] args) throws IOException {
         int t = Integer.parseInt(br.readLine());
         while (t-- > 0) {
@@ -17,46 +15,45 @@ public class F {
     }
 
     public static void solve() throws IOException {
-        String[] nab = br.readLine().split(" ");
-        int n = Integer.parseInt(nab[0]), a = Integer.parseInt(nab[1]) - 1, b = Integer.parseInt(nab[2]) - 1;
-        List<List<int[]>> graph = new ArrayList<>();
-        for (int i = 0; i < n + 1; i++) {
-            graph.add(new ArrayList<>());
+        String[] ncd = br.readLine().split(" ");
+        int n = Integer.parseInt(ncd[0]), d = Integer.parseInt(ncd[2]);
+        long c = Long.parseLong(ncd[1]);
+        String[] ns = br.readLine().split(" ");
+        Long[] nums = new Long[n];
+        for (int i = 0; i < n; i++) {
+            nums[i] = Long.parseLong(ns[i]);
         }
+        Arrays.sort(nums, Collections.reverseOrder());
 
-        for (int i = 0; i < n - 1; i++) {
-            String[] uvw = br.readLine().split(" ");
-            int u = Integer.parseInt(uvw[0]) - 1, v = Integer.parseInt(uvw[1]) - 1;
-            int w = Integer.parseInt(uvw[2]);
-            graph.get(u).add(new int[] {v, w});
-            graph.get(v).add(new int[] {u, w});
-        }
-
-        Set<Integer> set = new HashSet<>();
-        found = false;
-        dfs(set, graph, b, a, -1, 0);
-
-        System.out.println(found ? "YES" : "NO");
-    }
-
-    private static void dfs(Set<Integer> set, List<List<int[]>> graph, int b, int curr, int prev, int xor) {
-        if (curr == b) {
-            if (xor == 0) found = true;
-            return;
-        }
-        set.add(xor);
-        for (int[] edges : graph.get(curr)) {
-            int next = edges[0], weight = edges[1];
-            int nextXor = xor ^ weight;
-            if (next != prev) {
-                if (next == b) {
-                    if (nextXor == 0) found = true;
-                } else {
-                    if (set.contains(nextXor)) found = true;
-                    dfs(set, graph, b, next, curr, nextXor);
-                }
+        int left = 0, right = d + 1;
+        int ans = -1;
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+            if (check(nums, c, d, mid)) {
+                ans = mid;
+                left = mid + 1;
+            } else {
+                right = mid - 1;
             }
         }
+
+        if (ans == -1) {
+            System.out.println("Impossible");
+        } else if (ans == d + 1) {
+            System.out.println("Infinity");
+        } else {
+            System.out.println(ans - 1);
+        }
     }
 
+    private static boolean check(Long[] nums, long c, int d, int k) {
+        if (k == 0) return 1l * d * nums[0] >= c;
+        long sum = 0;
+        for (int i = 0; i < d; i++) {
+            if (i % k < nums.length) {
+                sum += nums[(i % k)];
+            }
+        }
+        return sum >= c;
+    }
 }
