@@ -1,4 +1,4 @@
-package Div2.CFGlobalRound26;
+package Div2.CFGlobalRound26Div2;
 
 import java.io.BufferedReader;
 import java.io.IOException;
