@@ -3,10 +3,8 @@ package Div4.CFRound944Div4;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.List;
 
-public class D {
+public class F {
     static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
     public static void main(String[] args) throws IOException {
@@ -18,17 +16,21 @@ public class D {
 
 
     private static void solve() throws IOException {
-        String s = br.readLine();
-        List<Character> list = new ArrayList<>();
-        for (int i = 0; i < s.length(); i++) {
-            if (list.size() == 0 || list.get(list.size() - 1) != s.charAt(i)) {
-                list.add(s.charAt(i));
+        long r = Long.parseLong(br.readLine());
+        long r1 = r * r, r2 = (r + 1) * (r + 1);
+        int ans = 0;
+
+        for (long i = 1; i <= r; i++) {
+            long minY = (long) Math.ceil(Math.sqrt(r1 - i * i));
+            long maxY = (long) Math.sqrt(r2 - i * i - 0.1);
+
+            if (maxY >= minY) {
+                ans += maxY - minY + 1;
             }
         }
 
-        int ans = list.size();
-        if (list.size() > 2 || (list.size() == 2 && list.get(0) == '0')) ans--;
-        System.out.println(ans);
+        System.out.println(ans * 4);
+
     }
 }
 
