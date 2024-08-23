@@ -1,8 +1,12 @@
+package Div3.CFRound498Div3;
 
-import java.io.*;
-import java.util.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.HashMap;
+import java.util.Map;
 
-public class Main {
+public class F {
     static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     static int[][] dirs1 = new int[][]{{0, 1}, {1, 0}}, dirs2 = new int[][]{{0, -1}, {-1, 0}};
     static long[][] board;
