@@ -1,9 +1,10 @@
+package Div3.CFRound501Div3;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
-import java.io.*;
-import java.util.*;
-
-public class Main {
+public class F {
     static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     static int[][] dirs = {{-1, 0}, {0, 1}, {1, 0}, {0, - 1}};
     static int MOD = 1000000007;
