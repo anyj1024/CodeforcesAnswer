@@ -1,7 +1,10 @@
-import java.io.*;
-import java.util.*;
+package Div2.EduRound149Div2;
 
-public class Main {
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+public class A {
     static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
     public static void main(String[] args) throws IOException {
